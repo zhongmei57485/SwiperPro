@@ -5,6 +5,7 @@ from user.models import Profile
 
 
 
+
 class ProfileForm(forms.ModelForm):
 
     def _clean_max_distance(self):

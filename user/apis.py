@@ -94,4 +94,5 @@ def set_profile(request):
         return render_json()
 
     else:
+
         return render_json(data=form.errors)

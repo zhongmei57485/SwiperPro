@@ -5,6 +5,7 @@ from libs.http import render_json
 from user.models import User
 
 
+
 class AuthMiddleware(MiddlewareMixin):
 
     def process_request(self,request):

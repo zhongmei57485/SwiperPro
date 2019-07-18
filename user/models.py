@@ -123,5 +123,6 @@ class Profile(models.Model,ModelToDicMixin):
     auto_play = models.BooleanField(default=True)
 
 
+
     class Meta:
         db_table = 'profiles'
