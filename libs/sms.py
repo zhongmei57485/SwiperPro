@@ -23,8 +23,9 @@ def send_verify_code(phone,code):
         ret = resp.json()
         if ret.get('code') == '000000':
             return  True
-        return False
 
-    print()
+    return False
+
+
 
 
