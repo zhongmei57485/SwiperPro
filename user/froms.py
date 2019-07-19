@@ -8,6 +8,9 @@ from user.models import Profile
 
 class ProfileForm(forms.ModelForm):
 
+    def clean(self):
+        pass
+
     def _clean_max_distance(self):
         max_distance = self._clean_data.get('max_distance')
         min_distance = self._clean_data.get('min_distance')
@@ -40,4 +43,4 @@ class ProfileForm(forms.ModelForm):
 
         ]
 
-        #fields = __all__
+        #fields = '__all__'

@@ -1,9 +1,13 @@
+import os
+import time
+
 from django.core.cache import cache
 from django.http import JsonResponse
 from django.shortcuts import render,HttpResponse
 
 from common.utils import is_phone_num
 from common import errors, cache_keys
+from demo import settings
 from libs.http import render_json
 from user import logics
 from user.froms import ProfileForm
@@ -96,3 +100,58 @@ def set_profile(request):
     else:
 
         return render_json(data=form.errors)
+
+
+
+# def upload_avatar(request):
+#
+#     user = request.user
+#
+#     avatar = request.FILES.get('avatar')
+#
+#     file_name = 'avatar-{}'.format(int(time.time()))
+#     #
+#     # file_path = os.path.join(settings.MEDIA_BOOT,file_name)
+#     # with open(file_path,'wb+') as destination:
+#     #     for chunk in avatar.chunks():
+#     #         destination.write(chunk)
+#
+#     file_path = logics.upload_avatar(file_name,avatar)
+#
+#     ret = logics.upload_qiniuyun(file_name,file_path)
+#
+#     if ret:
+#         return render_json()
+#
+#     else:
+#
+#         return render_json(code=errors.QINIUYUN_UPLOAD_ERR)
+
+
+def upload_avatar(request):
+    user = request.user
+    avatar = request.FILES.get('avatar')
+
+    # file_name = 'avatar-{}'.format(int(time.time()))
+    #
+    # # 1、先将文件上传到本地服务器
+    #
+    # # file_path = os.path.join(settings.MEDIA_ROOT, file_name)
+    # #
+    # # with open(file_path, 'wb+') as destination:
+    # #     for chunk in avatar.chunks():
+    # #         destination.write(chunk)
+    #
+    # file_path = logics.upload_avatar(file_name, avatar)
+    #
+    # # 2、将本地文件上传到七牛云
+    # ret = logics.upload_qiniuyun(file_name, file_path)
+    #
+    # if ret:
+    #     return render_json()
+    # else:
+    #     return render_json(code=errors.AVATAR_UPLOAD_ERR)
+
+    logics.async_upload_avatar.delay(user, avatar)
+
+    return render_json()
