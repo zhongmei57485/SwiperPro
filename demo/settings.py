@@ -36,7 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     # 'django.contrib.messages',
     'django.contrib.staticfiles',
-    'user.apps.UserConfig'
+    'user.apps.UserConfig',
+    'social.apps.SocialConfig'
 
 
 ]
@@ -49,7 +50,8 @@ MIDDLEWARE = [
     # 'django.contrib.auth.middleware.AuthenticationMiddleware',
     # 'django.contrib.messages.middleware.MessageMiddleware',
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'common.middleware.AuthMiddleware'
+    'common.middleware.AuthMiddleware',
+    'common.middleware.LogicExceptionMiddleware',
 
 ]
 
