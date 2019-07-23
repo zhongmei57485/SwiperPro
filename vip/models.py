@@ -1,17 +1,17 @@
 from django.db import models
+from libs.orm import ModelToDictMixin
 
 
-
-class Vip(models.Model):
+class Vip(models.Model, ModelToDictMixin):
     """
     会员
     """
-    level = models.IntegerField(default=0,unique=True)
-    name = models.CharField(max_length=128,unique=True)
-    price = models.DecimalField(max_digits=5,decimal_places=2,default=0)
+    level = models.IntegerField(default=0, unique=True)
+    name = models.CharField(max_length=128, unique=True)
+    price = models.DecimalField(max_digits=5, decimal_places=2, default=0)
 
     class Meta:
-        db_table='vips'
+        db_table = 'vips'
 
     @property
     def perms(self):
@@ -40,11 +40,11 @@ class Vip(models.Model):
         return perm_name in perm_names
 
 
-class Permission(models.Model):
+class Permission(models.Model, ModelToDictMixin):
     """
     权限
     """
-    name = models.CharField(max_length=32,unique=True)
+    name = models.CharField(max_length=32, unique=True)
     description = models.CharField(max_length=512)
 
     class Meta:
@@ -58,7 +58,6 @@ class VipPermission(models.Model):
 
     vip_id = models.IntegerField()
     perm_id = models.IntegerField()
-
 
     class Meta:
         db_table = 'vip_permissions'
