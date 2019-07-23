@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     # 'django.contrib.messages',
     'django.contrib.staticfiles',
     'user.apps.UserConfig',
-    'social.apps.SocialConfig'
+    'social.apps.SocialConfig',
+    'vip.apps.VipConfig'
 
 
 ]

@@ -47,6 +47,10 @@ SwipeError = gen_logic_error('SwipeError', 3002)
 SwipeLimitError = gen_logic_error('SwipeLimitError', 3003)
 
 
+#VIP系统
+VipPermError = gen_logic_error("VipPermError",4001)
+
+
 """
 raise LogicException(SWIPE_ERR)
 raise SwipeError
