@@ -1,6 +1,7 @@
 from django.core.cache import cache
 from django.db import models
 import datetime
+from vip.models import Vip
 
 from libs.orm import ModelToDicMixin
 
@@ -50,6 +51,12 @@ class User(models.Model):
     avatar = models.CharField(max_length=256)
     location = models.CharField(max_length=16,choices=LOCATIONS,default='gz')
 
+
+    vip_id = models.IntegerField(default=1)
+
+
+
+
     @property
     def age(self):
         today = datetime.date.today()
@@ -66,6 +73,12 @@ class User(models.Model):
 
             self._profile,_ = Profile.objects.get_or_create(pk=self.id)
         return self._profile
+
+    @property
+    def vip(self):
+        if not hasattr(self,'_vip'):
+            self._vip=Vip.objects.get(pk = self.vip_id)
+        return self._vip
 
 
     def to_dict(self):
